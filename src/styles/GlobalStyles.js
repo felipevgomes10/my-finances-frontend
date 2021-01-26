@@ -14,8 +14,10 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   body {
+    font-family: Roboto Mono;
+    font-weight: 400;
+    color: #FFFFFF;
     font-size: 1.6rem;
-    min-height: calc(100vh + 5px);
   }
 
   img {
@@ -30,6 +32,13 @@ export const GlobalStyle = createGlobalStyle`
   a:link,
   a:visited {
     text-decoration: none;
-    color: #333;
+  }
+
+  main {
+    margin-left: 25.6rem;
+    min-height: 100vh;
+    width: calc(100% - 25.6rem);
+    background: #22242c;
+    padding: 6rem 3rem;
   }
 `
