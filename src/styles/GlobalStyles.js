@@ -13,7 +13,10 @@ export const GlobalStyle = createGlobalStyle`
     font-size: 62.5%;
   }
 
-  body {
+  body,
+  label,
+  input,
+  button {
     font-family: Roboto Mono;
     font-weight: 400;
     color: #FFFFFF;
