@@ -1,7 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit'
+import { closeBudgetModal } from './budgetModal'
+import { getBudget } from './user'
 
 const slice = createSlice({
-  name: 'user',
+  name: 'budget',
   initialState: {
     loading: false,
     data: null,
@@ -20,36 +22,32 @@ const slice = createSlice({
       state.loading = false
       state.data = null
       state.error = action.payload
-    },
-    userLogout(state) {
-      state.loading = false
-      state.data = null
-      state.error = null
-    },
-    getBudget(state, action) {
-      state.data.user.budget = action.payload
     }
   }
 })
 
 const { fetchStarted, fetchSuccess, fetchError } = slice.actions
-export const { userLogout, getBudget } = slice.actions
 
-export const userLogin = (url, payload) => async dispatch => {
+export const createBudget = (url, token, payload) => async dispatch => {
   try {
     dispatch(fetchStarted())
-    const response = await fetch(`${url}/auth/local`, {
+    const response = await fetch(`${url}/budgets`, {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`
       },
       body: JSON.stringify(payload)
     })
 
     const data = await response.json()
-    if (data.statusCode) throw new Error('Usuário ou senha inválido(a)')
+    if (data.statusCode) {
+      throw new Error('Chamada inválida ou usuário já possui um orçamento')
+    }
 
     dispatch(fetchSuccess(data))
+    dispatch(getBudget(data))
+    dispatch(closeBudgetModal())
   } catch (error) {
     dispatch(fetchError(error.message))
   }
