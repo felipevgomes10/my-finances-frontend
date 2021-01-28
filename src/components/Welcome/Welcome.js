@@ -1,12 +1,15 @@
 import React from 'react'
 import { WelcomeSign, WelcomeWrapper } from './WelcomeStyles'
 import Proptypes from 'prop-types'
+import { useSelector } from 'react-redux'
 
-const Welcome = ({ username, text }) => {
+const Welcome = ({ text }) => {
+  const username = useSelector(state => state.user.data?.user.username)
+
   return (
     <WelcomeWrapper>
       <WelcomeSign>
-        <h1>Bem-vindo {username || 'ao MyFinances!'}</h1>
+        <h1>Bem-vindo {username || 'ao MyFinances'}!</h1>
         <p>{text}</p>
       </WelcomeSign>
     </WelcomeWrapper>
@@ -16,6 +19,5 @@ const Welcome = ({ username, text }) => {
 export default Welcome
 
 Welcome.propTypes = {
-  username: Proptypes.string,
   text: Proptypes.string
 }
