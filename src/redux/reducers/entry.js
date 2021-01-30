@@ -1,11 +1,14 @@
 import { createSlice } from '@reduxjs/toolkit'
+import { closeEntryModal } from './entryModal'
+import { getEntries } from './user'
 
 const slice = createSlice({
-  name: 'user',
+  name: 'entry',
   initialState: {
     loading: false,
     data: null,
-    error: null
+    error: null,
+    method: ''
   },
   reducers: {
     fetchStarted(state) {
@@ -21,38 +24,43 @@ const slice = createSlice({
       state.data = null
       state.error = action.payload
     },
-    userLogout(state) {
-      state.loading = false
-      state.data = null
-      state.error = null
-    },
-    getBudget(state, action) {
-      state.data.user.budget = action.payload
-    },
-    getEntries(state, action) {
-      state.data.user.entries = action.payload
+    setEntryMethod(state, action) {
+      state.method = action.payload
     }
   }
 })
 
 const { fetchStarted, fetchSuccess, fetchError } = slice.actions
-export const { userLogout, getBudget, getEntries } = slice.actions
+export const { setEntryMethod } = slice.actions
 
-export const userLogin = (url, payload) => async dispatch => {
+export const setEntry = (url, method, token, payload) => async (
+  dispatch,
+  getState
+) => {
   try {
     dispatch(fetchStarted())
-    const response = await fetch(`${url}/auth/local`, {
-      method: 'POST',
+
+    const response = await fetch(url, {
+      method,
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`
       },
       body: JSON.stringify(payload)
     })
 
     const data = await response.json()
-    if (data.statusCode) throw new Error('Usuário ou senha inválido(a)')
+    if (data.statusCode) throw new Error('Algo errado, tente novamente')
 
     dispatch(fetchSuccess(data))
+
+    const { entry, user } = getState()
+
+    if (entry.method === 'POST') {
+      const newEntries = [...user.data.user.entries, data]
+      dispatch(getEntries(newEntries))
+      dispatch(closeEntryModal())
+    }
   } catch (error) {
     dispatch(fetchError(error.message))
   }

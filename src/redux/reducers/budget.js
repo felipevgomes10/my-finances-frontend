@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { closeBudgetModal } from './budgetModal'
+import { closeDeleteModal } from './deleteModal'
 import { getBudget } from './user'
 
 const slice = createSlice({
@@ -7,7 +8,8 @@ const slice = createSlice({
   initialState: {
     loading: false,
     data: null,
-    error: null
+    error: null,
+    method: ''
   },
   reducers: {
     fetchStarted(state) {
@@ -22,17 +24,24 @@ const slice = createSlice({
       state.loading = false
       state.data = null
       state.error = action.payload
+    },
+    setBudgetMethod(state, action) {
+      state.method = action.payload
     }
   }
 })
 
 const { fetchStarted, fetchSuccess, fetchError } = slice.actions
+export const { setBudgetMethod } = slice.actions
 
-export const createBudget = (url, token, payload) => async dispatch => {
+export const createBudget = (url, method, token, payload) => async (
+  dispatch,
+  getState
+) => {
   try {
     dispatch(fetchStarted())
-    const response = await fetch(`${url}/budgets`, {
-      method: 'POST',
+    const response = await fetch(url, {
+      method,
       headers: {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${token}`
@@ -46,8 +55,16 @@ export const createBudget = (url, token, payload) => async dispatch => {
     }
 
     dispatch(fetchSuccess(data))
-    dispatch(getBudget(data))
-    dispatch(closeBudgetModal())
+
+    const { budget } = getState()
+
+    if (budget.method === 'POST' || budget.method === 'PUT') {
+      dispatch(getBudget(data))
+      dispatch(closeBudgetModal())
+    } else {
+      dispatch(getBudget(null))
+      dispatch(closeDeleteModal())
+    }
   } catch (error) {
     dispatch(fetchError(error.message))
   }

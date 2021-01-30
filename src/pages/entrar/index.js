@@ -8,11 +8,12 @@ import useForm from '../../hooks/useForm'
 import { userLogin } from '../../redux/reducers/user'
 import { useRouter } from 'next/router'
 import PropTypes from 'prop-types'
+import ErrorText from '../../components/Helpers/Error/Error'
 
 const SignIn = ({ baseUrl }) => {
   const email = useForm()
   const password = useForm()
-  const { loading, data } = useSelector(state => state.user)
+  const { loading, data, error } = useSelector(state => state.user)
   const dispatch = useDispatch()
   const router = useRouter()
 
@@ -62,6 +63,7 @@ agora e começe a ter controle da sua vida financeira!`}
           onBlur={password.onBlur}
           error={password.error}
         />
+        {error && <ErrorText>{error}</ErrorText>}
         {!loading ? (
           <Button>Entrar</Button>
         ) : (
