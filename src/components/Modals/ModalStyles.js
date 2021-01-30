@@ -1,4 +1,4 @@
-import styled, { keyframes } from 'styled-components'
+import styled, { keyframes, css } from 'styled-components'
 import { flex } from '../commonStyles'
 
 const slideDown = keyframes`
@@ -47,18 +47,35 @@ export const ModalWrapper = styled.form`
     font-weight: 500;
     font-size: 1.6rem;
     line-height: 1.9rem;
+    max-width: 226px;
     text-align: center;
   }
+
+  ${props =>
+    props.h4mb &&
+    css`
+      h4 {
+        margin-bottom: 3.2rem;
+      }
+    `}
+
+  ${props =>
+    props.h4mbsm &&
+    css`
+      h4 {
+        margin-bottom: 0.8rem;
+      }
+    `}
 `
 
 export const InputModal = styled.input`
   width: 20.9rem;
-  height: 2.6rem;
+  height: ${({ height }) => height || '2.6rem'};
   background: ${props => props.theme.colors.font};
   border-radius: 2px;
   border: 2px solid transparent;
-  margin: 1.6rem 0;
-  padding: 1.6rem;
+  margin: ${({ margin }) => (margin && '.8rem 0') || '1.6rem 0'};
+  padding: ${({ padding }) => padding || '1.6rem'};
   transition: 0.3s;
   color: ${props => props.theme.colors.background};
 
@@ -70,6 +87,12 @@ export const InputModal = styled.input`
 
 export const ButtonWrapper = styled.div`
   ${flex};
+
+  ${props =>
+    props.mt &&
+    css`
+      margin-top: 2.4rem;
+    `}
 
   button {
     ${flex};
@@ -103,7 +126,6 @@ export const ButtonWrapper = styled.div`
   }
 
   button:last-child {
-    margin-right: 1.6rem;
     border: 1px solid ${props => props.theme.colors.secondary};
     background: none;
 

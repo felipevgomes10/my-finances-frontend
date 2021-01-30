@@ -6,10 +6,15 @@ import Board from '../components/Board/Board'
 import Budget from '../components/Board/Budget/Budget'
 import BudgetModal from '../components/Modals/BudgetModal/BudgetModal'
 import PropTypes from 'prop-types'
+import DeleteModal from '../components/Modals/DeleteModal/DeleteModal'
+import TableItems from '../components/Board/TableItems/TableItems'
+import EntryModal from '../components/Modals/EntryModal/EntryModal'
 
 const Home = ({ baseUrl }) => {
   const { user } = useSelector(state => state)
   const { budgetModal } = useSelector(state => state)
+  const { deleteModal } = useSelector(state => state)
+  const { entryModal } = useSelector(state => state)
   const router = useRouter()
 
   useEffect(() => {
@@ -24,8 +29,13 @@ const Home = ({ baseUrl }) => {
       <Welcome text="Aqui você pode anotar e manter do controle dos seus gastos. Começe a ter controle da sua vida financeira!" />
       <Board>
         <Budget />
+        <TableItems title="Gastos" first />
+        <TableItems title="Ganhos" second />
+        <TableItems title="Histórico completo" third />
       </Board>
       {budgetModal.open && <BudgetModal baseUrl={baseUrl} />}
+      {deleteModal.open && <DeleteModal baseUrl={baseUrl} />}
+      {entryModal.open && <EntryModal baseUrl={baseUrl} />}
     </div>
   )
 }

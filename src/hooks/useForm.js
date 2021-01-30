@@ -31,6 +31,7 @@ const useForm = () => {
 
   return {
     value,
+    setValue,
     error,
     onChange,
     onBlur,
