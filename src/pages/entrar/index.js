@@ -39,8 +39,9 @@ const SignIn = ({ baseUrl }) => {
   return (
     <div>
       <Welcome
-        text={`Aqui você pode anotar e manter do controle dos seus gastos. Cadastre-se
-agora e começe a ter controle da sua vida financeira!`}
+        text={
+          'Aqui você pode anotar e manter do controle dos seus gastos. Entre na sua conta e começe a ter controle da sua vida financeira!'
+        }
       />
       <Form text="Entre na sua conta" onSubmit={handleSubmit}>
         <Input
@@ -74,13 +75,14 @@ agora e começe a ter controle da sua vida financeira!`}
   )
 }
 
-export const getStaticProps = () => {
+export const getStaticProps = async () => {
   const baseUrl = process.env.API_URL
 
   return {
     props: {
       baseUrl
-    }
+    },
+    revalidate: 1
   }
 }
 

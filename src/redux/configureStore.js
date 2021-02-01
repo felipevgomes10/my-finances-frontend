@@ -9,6 +9,7 @@ import budget from './reducers/budget'
 import deleteModal from './reducers/deleteModal'
 import entryModal from './reducers/entryModal'
 import entry from './reducers/entry'
+import createUser from './reducers/createUser'
 
 const middleware = [...getDefaultMiddleware()]
 const reducer = combineReducers({
@@ -17,7 +18,8 @@ const reducer = combineReducers({
   budget,
   deleteModal,
   entryModal,
-  entry
+  entry,
+  createUser
 })
 const store = configureStore({ reducer, middleware })
 
