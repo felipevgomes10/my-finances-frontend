@@ -3,7 +3,9 @@ import { createSlice } from '@reduxjs/toolkit'
 const slice = createSlice({
   name: 'deleteModal',
   initialState: {
-    open: false
+    open: false,
+    endPoint: '',
+    id: ''
   },
   reducers: {
     openDeleteModal(state) {
@@ -11,9 +13,17 @@ const slice = createSlice({
     },
     closeDeleteModal(state) {
       state.open = false
+    },
+    setModalEndPoint(state, action) {
+      state.endPoint = action.payload.endPoint
+      state.id = action.payload.id
     }
   }
 })
 
-export const { openDeleteModal, closeDeleteModal } = slice.actions
+export const {
+  openDeleteModal,
+  closeDeleteModal,
+  setModalEndPoint
+} = slice.actions
 export default slice.reducer

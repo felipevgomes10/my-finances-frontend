@@ -6,11 +6,12 @@ export const TableItemsWrapper = styled.div`
   ${flex};
   justify-content: flex-start;
   align-items: flex-start;
+  flex-direction: column;
   ${wrapperStyles};
   overflow-y: auto;
   position: relative;
 
-  button {
+  & > button {
     position: absolute;
     top: 1.6rem;
     right: 1.6rem;
@@ -59,4 +60,14 @@ export const TableItemsWrapper = styled.div`
         color: ${props => props.theme.colors.font};
       }
     `}
+  
+  &::-webkit-scrollbar {
+    width: 4px;
+    height: 8.2rem;
+    border-radius: 10px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: ${props => props.theme.colors.secondary};
+  }
 `

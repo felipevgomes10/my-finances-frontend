@@ -4,21 +4,30 @@ import AddIcon from '../../../../public/modals/add.svg'
 import EditIcon from '../../../../public/modals/edit.svg'
 import PropTypes from 'prop-types'
 import { useDispatch, useSelector } from 'react-redux'
-import { closeEntryModal } from '../../../redux/reducers/entryModal'
-import useForm from '../../../hooks/useForm'
-import { setEntry } from '../../../redux/reducers/entry'
+import {
+  closeEntryModal,
+  resetEntryModalValues,
+  setEntryModalValues
+} from '../../../redux/reducers/entryModal'
+import { resetError, setEntry } from '../../../redux/reducers/entry'
 import ErrorText from '../../Helpers/Error/Error'
 
 const EntryModal = ({ baseUrl }) => {
-  const description = useForm()
-  const value = useForm()
-  const type = useForm()
   const { data } = useSelector(state => state.user)
   const { entry } = useSelector(state => state)
+  const { entryModal } = useSelector(state => state)
+
   const dispatch = useDispatch()
+
+  const url =
+    entry.method === 'POST'
+      ? `${baseUrl}/entries`
+      : `${baseUrl}/entries/${entryModal.id}`
 
   const closeModal = useCallback(() => {
     dispatch(closeEntryModal())
+    dispatch(resetError())
+    dispatch(resetEntryModalValues())
   }, [dispatch])
 
   const handleSubmit = useCallback(
@@ -26,54 +35,61 @@ const EntryModal = ({ baseUrl }) => {
       e.preventDefault()
 
       dispatch(
-        setEntry(`${baseUrl}/entries`, entry.method, data.jwt, {
-          description: description.value,
-          value: Number(value.value),
-          type: type.value
+        setEntry(url, entry.method, data.jwt, {
+          description: entryModal.description.toLowerCase(),
+          value: Number(entryModal.value),
+          type: entryModal.type
         })
       )
     },
     [
-      baseUrl,
       data.jwt,
-      description.value,
       dispatch,
       entry.method,
-      type.value,
-      value.value
+      entryModal.description,
+      entryModal.type,
+      entryModal.value,
+      url
     ]
   )
 
   return (
     <Blur>
       <ModalWrapper h4mbsm onSubmit={handleSubmit}>
-        <AddIcon />
-        <h4>Adicionar Item</h4>
+        {entry.method === 'POST' ? <AddIcon /> : <EditIcon />}
+        <h4>{entry.method === 'POST' ? 'Adicionar Item' : 'Editar Item'}</h4>
         <InputModal
           type="text"
           placeholder="Descrição..."
           margin
-          value={description.value}
-          onChange={description.onChange}
-          onBlur={description.onBlur}
+          value={entryModal.description}
+          onChange={({ target }) =>
+            dispatch(
+              setEntryModalValues({ ...entryModal, description: target.value })
+            )
+          }
         />
         <InputModal
           type="number"
           placeholder="Valor..."
           width="10.4rem"
           margin
-          value={value.value}
-          onChange={value.onChange}
-          onBlur={value.onBlur}
+          value={entryModal.value}
+          onChange={({ target }) =>
+            dispatch(
+              setEntryModalValues({ ...entryModal, value: target.value })
+            )
+          }
         />
         <InputModal
           as="select"
           padding="0"
           height="3.6rem"
           margin
-          value={type.value}
-          onChange={type.onChange}
-          onBlur={type.onBlur}
+          value={entryModal.type}
+          onChange={({ target }) =>
+            dispatch(setEntryModalValues({ ...entryModal, type: target.value }))
+          }
         >
           <option value="" disabled>
             Escolha um valor

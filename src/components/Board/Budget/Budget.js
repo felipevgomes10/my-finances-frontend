@@ -6,7 +6,10 @@ import Edit from '../../../../public/board/edit-gray.svg'
 import Remove from '../../../../public/board/delete-gray.svg'
 import { openBudgetModal } from '../../../redux/reducers/budgetModal'
 import { setBudgetMethod } from '../../../redux/reducers/budget'
-import { openDeleteModal } from '../../../redux/reducers/deleteModal'
+import {
+  openDeleteModal,
+  setModalEndPoint
+} from '../../../redux/reducers/deleteModal'
 
 const Budget = () => {
   const [totalEarned, setTotalEarned] = useState()
@@ -33,10 +36,10 @@ const Budget = () => {
 
   useEffect(() => {
     if (totalEarned || totalExpensed) {
-      const value = data.user.budget.value + totalEarned - totalExpensed
+      const value = data.user.budget?.value + totalEarned - totalExpensed
       setTotaltotalRemaining(parseFloat(value.toFixed(2)))
     }
-  }, [data.user.budget.value, totalEarned, totalExpensed])
+  }, [data.user.budget?.value, totalEarned, totalExpensed])
 
   const openModalToPostOrPut = useCallback(
     method => {
@@ -49,7 +52,8 @@ const Budget = () => {
   const openModalToDelete = useCallback(() => {
     dispatch(openDeleteModal())
     dispatch(setBudgetMethod('DELETE'))
-  }, [dispatch])
+    dispatch(setModalEndPoint({ id: data?.user.id, endPoint: 'budget' }))
+  }, [dispatch, data?.user.id])
 
   if (!data.user.budget) {
     return (

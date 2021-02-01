@@ -9,12 +9,20 @@ import PropTypes from 'prop-types'
 import DeleteModal from '../components/Modals/DeleteModal/DeleteModal'
 import TableItems from '../components/Board/TableItems/TableItems'
 import EntryModal from '../components/Modals/EntryModal/EntryModal'
+import Entry from '../components/Entry/Entry'
+import earnings from '../redux/filters/earnings'
+import expenses from '../redux/filters/expenses'
 
 const Home = ({ baseUrl }) => {
   const { user } = useSelector(state => state)
+
+  const userEarnings = useSelector(earnings)
+  const userExpenses = useSelector(expenses)
+
   const { budgetModal } = useSelector(state => state)
   const { deleteModal } = useSelector(state => state)
   const { entryModal } = useSelector(state => state)
+
   const router = useRouter()
 
   useEffect(() => {
@@ -29,9 +37,39 @@ const Home = ({ baseUrl }) => {
       <Welcome text="Aqui você pode anotar e manter do controle dos seus gastos. Começe a ter controle da sua vida financeira!" />
       <Board>
         <Budget />
-        <TableItems title="Gastos" first />
-        <TableItems title="Ganhos" second />
-        <TableItems title="Histórico completo" third />
+        <TableItems title="Gastos" first>
+          {userExpenses.map(({ description, value, id, type }) => (
+            <Entry
+              key={id}
+              id={id}
+              description={description}
+              value={value}
+              type={type}
+            />
+          ))}
+        </TableItems>
+        <TableItems title="Ganhos" second>
+          {userEarnings.map(({ description, value, id, type }) => (
+            <Entry
+              key={id}
+              id={id}
+              description={description}
+              value={value}
+              type={type}
+            />
+          ))}
+        </TableItems>
+        <TableItems title="Histórico completo" third>
+          {user.data.user.entries.map(({ description, value, id, type }) => (
+            <Entry
+              key={id}
+              id={id}
+              description={description}
+              value={value}
+              type={type}
+            />
+          ))}
+        </TableItems>
       </Board>
       {budgetModal.open && <BudgetModal baseUrl={baseUrl} />}
       {deleteModal.open && <DeleteModal baseUrl={baseUrl} />}
@@ -40,13 +78,14 @@ const Home = ({ baseUrl }) => {
   )
 }
 
-export const getStaticProps = () => {
+export const getStaticProps = async () => {
   const baseUrl = process.env.API_URL
 
   return {
     props: {
       baseUrl
-    }
+    },
+    revalidate: 1
   }
 }
 
