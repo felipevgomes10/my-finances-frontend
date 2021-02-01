@@ -9,6 +9,6 @@ export const BoardWrapper = styled.div`
 
 export const wrapperStyles = css`
   background: ${props => props.theme.colors.background};
-  border-radius: 20px;
+  border-radius: 8px;
   padding: 1.6rem;
 `
