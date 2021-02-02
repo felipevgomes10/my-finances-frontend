@@ -5,6 +5,11 @@ export const BoardWrapper = styled.div`
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 108px 281px 256px;
   gap: 32px;
+
+  @media (max-width: 900px) {
+    grid-template-columns: 1fr;
+    grid-template-rows: 108px repeat(3, 281px);
+  }
 `
 
 export const wrapperStyles = css`

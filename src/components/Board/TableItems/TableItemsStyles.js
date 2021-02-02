@@ -28,11 +28,19 @@ export const TableItemsWrapper = styled.div`
     margin-bottom: 1.6rem;
   }
 
+  @media (max-width: 900px) {
+    grid-column: 1/-1;
+  }
+
   ${props =>
     props.first &&
     css`
       grid-column: 2/3;
       grid-row: 1/3;
+
+      @media (max-width: 900px) {
+        grid-row: 2/3;
+      }
 
       h4 {
         color: ${props => props.theme.colors.error};
@@ -45,6 +53,10 @@ export const TableItemsWrapper = styled.div`
       grid-column: 1/2;
       grid-row: 2/3;
 
+      @media (max-width: 900px) {
+        grid-row: 3/4;
+      }
+
       h4 {
         color: ${props => props.theme.colors.positive};
       }
@@ -55,6 +67,10 @@ export const TableItemsWrapper = styled.div`
     css`
       grid-column: 1/-1;
       grid-row: 3/4;
+
+      @media (max-width: 900px) {
+        grid-row: 4/5;
+      }
 
       h4 {
         color: ${props => props.theme.colors.font};

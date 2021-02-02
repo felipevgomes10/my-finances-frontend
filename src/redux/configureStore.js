@@ -10,6 +10,7 @@ import deleteModal from './reducers/deleteModal'
 import entryModal from './reducers/entryModal'
 import entry from './reducers/entry'
 import createUser from './reducers/createUser'
+import mobileMenu from './reducers/mobileMenu'
 
 const middleware = [...getDefaultMiddleware()]
 const reducer = combineReducers({
@@ -19,7 +20,8 @@ const reducer = combineReducers({
   deleteModal,
   entryModal,
   entry,
-  createUser
+  createUser,
+  mobileMenu
 })
 const store = configureStore({ reducer, middleware })
 

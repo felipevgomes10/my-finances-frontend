@@ -43,5 +43,16 @@ export const GlobalStyle = createGlobalStyle`
     width: calc(100% - 25.6rem);
     background: #22242c;
     padding: 6rem 3rem;
+
+    @media (max-width: 700px) {
+      margin-left: 5.6rem;
+      width: calc(100% - 5.6rem);
+      padding: 1.5rem 1rem;
+    }
+
+    @media (max-width: 370px) {
+      margin-left: 3.6rem;
+      width: calc(100% - 3.6rem);
+    }
   }
 `

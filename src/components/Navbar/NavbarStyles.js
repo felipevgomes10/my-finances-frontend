@@ -13,9 +13,31 @@ export const NavBar = styled.nav`
   height: 100vh;
   background: ${props => props.theme.colors.primary};
   padding: 6rem 0 6rem 3rem;
+  transition: 0.3s;
   position: fixed;
   left: 0;
   top: 0;
+  z-index: 9;
+
+  @media (max-width: 700px) {
+    width: 5.6rem;
+    & * {
+      opacity: 0;
+      pointer-events: none;
+    }
+  }
+
+  @media (max-width: 370px) {
+    width: 3.6rem;
+  }
+
+  &.navBarActive {
+    width: 25.6rem;
+    & * {
+      opacity: 1;
+      pointer-events: initial;
+    }
+  }
 `
 
 export const DivBorder = styled.div`

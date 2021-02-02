@@ -60,6 +60,7 @@ const EntryModal = ({ baseUrl }) => {
         <h4>{entry.method === 'POST' ? 'Adicionar Item' : 'Editar Item'}</h4>
         <InputModal
           type="text"
+          maxLength="12"
           placeholder="Descrição..."
           margin
           value={entryModal.description}
