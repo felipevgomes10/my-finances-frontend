@@ -16,6 +16,10 @@ export const EntryWrapper = styled.div`
     font-size: 1.4rem;
     line-height: 1.8rem;
     margin-right: 1rem;
+
+    @media (max-width: 370px) {
+      font-size: 1.2rem;
+    }
   }
 
   span:nth-of-type(2) {
@@ -44,6 +48,10 @@ export const EntryButtonsWrapper = styled.div`
 
   button:not(:last-child) {
     margin-right: 1.6rem;
+
+    @media (max-width: 370px) {
+      margin-right: 1rem;
+    }
   }
 
   button svg path {

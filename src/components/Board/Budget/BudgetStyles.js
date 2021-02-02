@@ -6,6 +6,11 @@ export const BudgetWrapper = styled.div`
   ${wrapperStyles};
   position: relative;
 
+  @media (max-width: 900px) {
+    grid-column: 1/-1;
+    grid-row: 1/2;
+  }
+
   div {
     position: absolute;
     top: 16px;
@@ -27,6 +32,10 @@ export const BudgetWrapper = styled.div`
   span {
     font-size: 1.4rem;
     font-weight: 400;
+
+    @media (max-width: 370px) {
+      font-size: 1.2rem;
+    }
   }
 
   p:nth-of-type(1) span {

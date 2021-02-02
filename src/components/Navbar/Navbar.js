@@ -11,6 +11,8 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { useDispatch, useSelector } from 'react-redux'
 import { userLogout } from '../../redux/reducers/user'
+import MobileMenu from '../MobileMenu/MobileMenu'
+import { closeMenu } from '../../redux/reducers/mobileMenu'
 
 const Navbar = () => {
   const router = useRouter()
@@ -24,7 +26,8 @@ const Navbar = () => {
       if (path === router.pathname) link.classList.add('activeLink')
       else link.classList.remove('activeLink')
     })
-  }, [router.pathname])
+    dispatch(closeMenu())
+  }, [dispatch, router.pathname])
 
   const handleLogout = useCallback(() => {
     if (user.data) {
@@ -33,56 +36,59 @@ const Navbar = () => {
   }, [dispatch, user.data])
 
   return (
-    <NavBar>
-      <DivBorder>
-        <h4>
-          <MoneyIcon /> MyFinances
-        </h4>
-        <NavLinks className="NavLinksWrapper">
-          {user.data && (
-            <div>
-              <Link href="/">
-                <a>
-                  <HistoryIcon /> Histórico
-                </a>
-              </Link>
-              <Link href="/ganhos">
-                <a>
-                  <EarningsIcon /> Ganhos
-                </a>
-              </Link>
-              <Link href="/gastos">
-                <a>
-                  <ExpensesIcon /> Gastos
-                </a>
-              </Link>
-            </div>
-          )}
-          <div>
-            {!user.data ? (
-              <>
-                <Link href="/entrar">
+    <>
+      <MobileMenu />
+      <NavBar className="NavBar">
+        <DivBorder>
+          <h4>
+            <MoneyIcon /> MyFinances
+          </h4>
+          <NavLinks className="NavLinksWrapper">
+            {user.data && (
+              <div>
+                <Link href="/">
                   <a>
-                    <SignInIcon /> Entrar
+                    <HistoryIcon /> Histórico
                   </a>
                 </Link>
-                <Link href="/cadastrar">
+                <Link href="/ganhos">
                   <a>
-                    <SignUpIcon /> Cadastrar
+                    <EarningsIcon /> Ganhos
                   </a>
                 </Link>
-              </>
-            ) : (
-              <Link href="/entrar">
-                <a onClick={handleLogout}>
-                  <LogOutIcon /> Sair
-                </a>
-              </Link>
+                <Link href="/gastos">
+                  <a>
+                    <ExpensesIcon /> Gastos
+                  </a>
+                </Link>
+              </div>
             )}
-          </div>
-        </NavLinks>
-      </DivBorder>
-    </NavBar>
+            <div>
+              {!user.data ? (
+                <>
+                  <Link href="/entrar">
+                    <a>
+                      <SignInIcon /> Entrar
+                    </a>
+                  </Link>
+                  <Link href="/cadastrar">
+                    <a>
+                      <SignUpIcon /> Cadastrar
+                    </a>
+                  </Link>
+                </>
+              ) : (
+                <Link href="/entrar">
+                  <a onClick={handleLogout}>
+                    <LogOutIcon /> Sair
+                  </a>
+                </Link>
+              )}
+            </div>
+          </NavLinks>
+        </DivBorder>
+      </NavBar>
+    </>
   )
 }
 
