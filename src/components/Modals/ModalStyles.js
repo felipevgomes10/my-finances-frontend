@@ -9,6 +9,12 @@ const slideDown = keyframes`
   }
 `
 
+const rotate = keyframes`
+  to {
+    transform: rotate(360deg);
+  }
+`
+
 export const Blur = styled.div`
   position: fixed;
   top: 0;
@@ -16,7 +22,7 @@ export const Blur = styled.div`
   width: 100%;
   height: 100%;
   background: rgba(34, 36, 44, 0.6);
-  z-index: 1;
+  z-index: 10;
 `
 
 export const ModalWrapper = styled.form`
@@ -35,6 +41,10 @@ export const ModalWrapper = styled.form`
   opacity: 0;
   pointer-events: none;
   animation: ${slideDown} 0.3s forwards;
+
+  @media (max-width: 400px) {
+    width: 29.2rem;
+  }
 
   svg {
     position: absolute;
@@ -109,15 +119,6 @@ export const ButtonWrapper = styled.div`
     &:hover {
       transform: scale(1.1);
     }
-
-    &:disabled {
-      cursor: wait;
-      background: ${props => props.theme.colors.secondaryLight};
-    }
-
-    &[disabled]:hover {
-      transform: initial;
-    }
   }
 
   button:first-child {
@@ -132,6 +133,25 @@ export const ButtonWrapper = styled.div`
     &:hover {
       background: ${props => props.theme.colors.secondary};
       color: ${props => props.theme.colors.font};
+    }
+
+    &:disabled {
+      cursor: wait;
+      background: ${props => props.theme.colors.secondary};
+    }
+
+    &[disabled]:hover {
+      transform: initial;
+    }
+
+    span {
+      display: block;
+      width: 15px;
+      height: 15px;
+      border-radius: 50%;
+      border: 2px solid ${props => props.theme.colors.primary};
+      border-bottom: 2px solid #ffffff;
+      animation: ${rotate} 0.5s linear infinite;
     }
   }
 `

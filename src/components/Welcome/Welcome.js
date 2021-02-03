@@ -9,7 +9,7 @@ const Welcome = ({ text }) => {
   return (
     <WelcomeWrapper>
       <WelcomeSign>
-        <h1>Bem-vindo {username || 'ao MyFinances'}!</h1>
+        <h1>Olá, {username || 'ao MyFinances'}!</h1>
         <p>{text}</p>
       </WelcomeSign>
     </WelcomeWrapper>

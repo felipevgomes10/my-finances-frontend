@@ -21,6 +21,8 @@ export const NavBar = styled.nav`
 
   @media (max-width: 700px) {
     width: 5.6rem;
+    background: ${props => props.theme.colors.background};
+
     & * {
       opacity: 0;
       pointer-events: none;
@@ -33,6 +35,8 @@ export const NavBar = styled.nav`
 
   &.navBarActive {
     width: 25.6rem;
+    background: ${props => props.theme.colors.primary};
+
     & * {
       opacity: 1;
       pointer-events: initial;
@@ -79,6 +83,10 @@ export const NavLinks = styled.div`
       line-height: 1.8rem;
       padding: 1.6rem;
       transition: 0.3s;
+
+      @media (max-width: 700px) {
+        width: 100%;
+      }
 
       &:not(:last-child) {
         margin-bottom: 1.3rem;

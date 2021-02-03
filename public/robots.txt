@@ -1,0 +1,9 @@
+Sitemap: https://myfinances.vercel.app/sitemap.xml
+
+User-Agent: *
+Disallow: 
+Allow: /entrar
+Allow: /cadastrar
+Disallow: /
+Disallow: /ganhos
+Disallow: /gastos

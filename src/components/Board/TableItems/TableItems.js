@@ -6,7 +6,7 @@ import { useDispatch } from 'react-redux'
 import { openEntryModal } from '../../../redux/reducers/entryModal'
 import { setEntryMethod } from '../../../redux/reducers/entry'
 
-const TableItems = ({ title, first, second, third, children }) => {
+const TableItems = ({ title, first, second, third, total, children }) => {
   const dispatch = useDispatch()
 
   const openModal = useCallback(() => {
@@ -15,13 +15,16 @@ const TableItems = ({ title, first, second, third, children }) => {
   }, [dispatch])
 
   return (
-    <TableItemsWrapper first={first} second={second} third={third}>
-      <button onClick={openModal}>
-        <Add />
-      </button>
-      <h4>{title}</h4>
-      {children}
-    </TableItemsWrapper>
+    <>
+      <TableItemsWrapper first={first} second={second} third={third}>
+        <button onClick={openModal}>
+          <Add />
+        </button>
+        <h4>{title}</h4>
+        {children}
+      </TableItemsWrapper>
+      {total && <p>Total: R$ {total}</p>}
+    </>
   )
 }
 
@@ -32,5 +35,6 @@ TableItems.propTypes = {
   first: PropTypes.bool,
   second: PropTypes.bool,
   third: PropTypes.bool,
+  total: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   children: PropTypes.any
 }

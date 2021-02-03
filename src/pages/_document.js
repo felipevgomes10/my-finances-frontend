@@ -35,8 +35,17 @@ export default class MyDocument extends Document {
           <meta charSet="utf-8" />
           <link rel="preconnect" href="https://fonts.gstatic.com" />
           <link
+            rel="shortcut icon"
+            href="./navbar/money.svg"
+            type="image/svg"
+          />
+          <link
             href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400;500;700&display=swap"
             rel="stylesheet"
+          />
+          <meta
+            name="google-site-verification"
+            content="zCcOQwjodArBvfR95sWp-nR4k3jxP_AoS54tQVaSr1g"
           />
         </Head>
         <body>

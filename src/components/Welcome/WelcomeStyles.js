@@ -6,6 +6,10 @@ export const WelcomeWrapper = styled.section`
   align-items: flex-start;
   flex-direction: column;
   margin-bottom: 6.4rem;
+
+  @media (max-width: 700px) {
+    margin-bottom: 3.2rem;
+  }
 `
 
 export const WelcomeSign = styled.div`
@@ -15,10 +19,18 @@ export const WelcomeSign = styled.div`
   border-radius: 20px;
   padding: 3.2rem;
 
+  @media (max-width: 800px) {
+    padding: 2.2rem;
+  }
+
   h1 {
     font-size: 3.2rem;
     line-height: 4.2rem;
     margin-bottom: 0.8rem;
+
+    @media (max-width: 800px) {
+      font-size: 2.2rem;
+    }
   }
 
   p {

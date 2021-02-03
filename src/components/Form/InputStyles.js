@@ -16,6 +16,10 @@ export const InputForm = styled.input`
   transition: 0.3s;
   color: ${props => props.theme.colors.background};
 
+  @media (max-width: 800px) {
+    width: 100%;
+  }
+
   &:focus {
     border: 2px solid ${props => props.theme.colors.fontFade};
     outline: none;

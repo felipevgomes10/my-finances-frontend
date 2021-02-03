@@ -86,4 +86,8 @@ export const TableItemsWrapper = styled.div`
   &::-webkit-scrollbar-thumb {
     background: ${props => props.theme.colors.secondary};
   }
+
+  & + p {
+    margin: 1.6rem;
+  }
 `

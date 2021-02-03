@@ -55,7 +55,13 @@ const BudgetModal = ({ baseUrl }) => {
           <button type="button" onClick={closeModal}>
             NÃO
           </button>
-          <button type="submit">SIM</button>
+          {budget.loading ? (
+            <button disabled>
+              <span></span>
+            </button>
+          ) : (
+            <button type="submit">SIM</button>
+          )}
         </ButtonWrapper>
       </ModalWrapper>
     </Blur>
