@@ -12,6 +12,7 @@ import EntryModal from '../components/Modals/EntryModal/EntryModal'
 import Entry from '../components/Entry/Entry'
 import earnings from '../redux/filters/earnings'
 import expenses from '../redux/filters/expenses'
+import PageHead from '../components/Head'
 
 const Home = ({ baseUrl }) => {
   const { user } = useSelector(state => state)
@@ -31,50 +32,53 @@ const Home = ({ baseUrl }) => {
     }
   }, [router, user.data])
 
-  if (!user.data) return null
+  if (!user.data) return <PageHead title="Página Inicial | My Finances" />
   return (
-    <div>
-      <Welcome text="Aqui você pode anotar e manter do controle dos seus gastos. Começe a ter controle da sua vida financeira!" />
-      <Board>
-        <Budget />
-        <TableItems title="Gastos" first>
-          {userExpenses.map(({ description, value, id, type }) => (
-            <Entry
-              key={id}
-              id={id}
-              description={description}
-              value={value}
-              type={type}
-            />
-          ))}
-        </TableItems>
-        <TableItems title="Ganhos" second>
-          {userEarnings.map(({ description, value, id, type }) => (
-            <Entry
-              key={id}
-              id={id}
-              description={description}
-              value={value}
-              type={type}
-            />
-          ))}
-        </TableItems>
-        <TableItems title="Histórico completo" third>
-          {user.data.user.entries.map(({ description, value, id, type }) => (
-            <Entry
-              key={id}
-              id={id}
-              description={description}
-              value={value}
-              type={type}
-            />
-          ))}
-        </TableItems>
-      </Board>
-      {budgetModal.open && <BudgetModal baseUrl={baseUrl} />}
-      {deleteModal.open && <DeleteModal baseUrl={baseUrl} />}
-      {entryModal.open && <EntryModal baseUrl={baseUrl} />}
-    </div>
+    <>
+      <PageHead title="Página Inicial | My Finances" />
+      <div>
+        <Welcome text="Aqui você pode anotar e manter o controle dos seus gastos. Começe a ter controle da sua vida financeira!" />
+        <Board>
+          <Budget />
+          <TableItems title="Gastos" first>
+            {userExpenses.map(({ description, value, id, type }) => (
+              <Entry
+                key={id}
+                id={id}
+                description={description}
+                value={value}
+                type={type}
+              />
+            ))}
+          </TableItems>
+          <TableItems title="Ganhos" second>
+            {userEarnings.map(({ description, value, id, type }) => (
+              <Entry
+                key={id}
+                id={id}
+                description={description}
+                value={value}
+                type={type}
+              />
+            ))}
+          </TableItems>
+          <TableItems title="Histórico completo" third>
+            {user.data.user.entries.map(({ description, value, id, type }) => (
+              <Entry
+                key={id}
+                id={id}
+                description={description}
+                value={value}
+                type={type}
+              />
+            ))}
+          </TableItems>
+        </Board>
+        {budgetModal.open && <BudgetModal baseUrl={baseUrl} />}
+        {deleteModal.open && <DeleteModal baseUrl={baseUrl} />}
+        {entryModal.open && <EntryModal baseUrl={baseUrl} />}
+      </div>
+    </>
   )
 }
 

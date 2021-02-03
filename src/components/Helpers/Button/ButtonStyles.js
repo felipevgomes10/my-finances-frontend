@@ -25,4 +25,8 @@ export const ButtonForm = styled.button`
   &[disabled]:hover {
     transform: initial;
   }
+
+  @media (max-width: 800px) {
+    width: 100%;
+  }
 `

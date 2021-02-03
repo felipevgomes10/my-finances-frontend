@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { useRouter } from 'next/router'
 import TableItems from '../../components/Board/TableItems/TableItems'
@@ -7,6 +7,7 @@ import EntryModal from '../../components/Modals/EntryModal/EntryModal'
 import expenses from '../../redux/filters/expenses'
 import PropTypes from 'prop-types'
 import DeleteModal from '../../components/Modals/DeleteModal/DeleteModal'
+import PageHead from '../../components/Head'
 
 const Expenses = ({ baseUrl }) => {
   const { user } = useSelector(state => state)
@@ -17,6 +18,7 @@ const Expenses = ({ baseUrl }) => {
   const router = useRouter()
 
   const userExpenses = useSelector(expenses)
+  const [total, setTotal] = useState(0)
 
   useEffect(() => {
     if (!user.data) {
@@ -24,23 +26,33 @@ const Expenses = ({ baseUrl }) => {
     }
   }, [router, user.data])
 
+  useEffect(() => {
+    const total = userExpenses?.reduce((acc, item) => {
+      return acc + item.value
+    }, 0)
+    setTotal(total)
+  }, [userExpenses])
+
   if (!user.data) return null
   return (
-    <div>
-      <TableItems title="Gastos">
-        {userExpenses.map(({ description, value, id, type }) => (
-          <Entry
-            key={id}
-            id={id}
-            description={description}
-            value={value}
-            type={type}
-          />
-        ))}
-      </TableItems>
-      {entryModal.open && <EntryModal baseUrl={baseUrl} />}
-      {deleteModal.open && <DeleteModal baseUrl={baseUrl} />}
-    </div>
+    <>
+      <PageHead title="Gastos | My Finances" />
+      <div>
+        <TableItems title="Gastos" total={total}>
+          {userExpenses.map(({ description, value, id, type }) => (
+            <Entry
+              key={id}
+              id={id}
+              description={description}
+              value={value}
+              type={type}
+            />
+          ))}
+        </TableItems>
+        {entryModal.open && <EntryModal baseUrl={baseUrl} />}
+        {deleteModal.open && <DeleteModal baseUrl={baseUrl} />}
+      </div>
+    </>
   )
 }
 

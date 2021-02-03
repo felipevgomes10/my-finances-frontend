@@ -3,15 +3,15 @@ import { flex } from '../commonStyles'
 
 export const MenuButton = styled.button`
   ${flex};
-  width: 4.6rem;
-  height: 4.6rem;
+  width: 4.2rem;
+  height: 4.2rem;
   border: 2px solid #ffffff;
   border-radius: 3px;
   background: none;
   outline: none;
   position: fixed;
   top: 1.6rem;
-  left: 0.9rem;
+  left: 0.7rem;
   z-index: 10;
   transition: 0.3s;
   cursor: pointer;
@@ -23,6 +23,7 @@ export const MenuButton = styled.button`
   @media (max-width: 370px) {
     width: 2.6rem;
     height: 2.6rem;
+    left: 0.54rem;
   }
 
   span {

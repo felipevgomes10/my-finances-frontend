@@ -11,4 +11,12 @@ export const FormPage = styled.form`
     line-height: 4.2rem;
     margin-bottom: 3.2rem;
   }
+
+  @media (max-width: 800px) {
+    padding: 2.2rem;
+
+    h1 {
+      font-size: 2.2rem;
+    }
+  }
 `

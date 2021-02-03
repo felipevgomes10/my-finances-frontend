@@ -17,7 +17,7 @@ const PageHead = props => {
       <meta property="og:image" content={props.ogImage} />
       <meta property="og:type" content={props.ogType} />
       <meta property="og:image:alt" content={props.ogAlt} />
-      <meta property="og:locale" content={props.ogLocole} />
+      <meta property="og:locale" content={props.ogLocale} />
       <meta name="twitter:title" content={props.twitterTitle} />
       <meta name="twitter:description" content={props.twitterDescription} />
       <meta name="twitter:url" content={props.twitterUrl} />
@@ -37,25 +37,25 @@ const PageHead = props => {
 export default PageHead
 
 PageHead.propTypes = {
-  title: PropTypes.string.isRequired,
-  description: PropTypes.string.isRequired,
-  href: PropTypes.string.isRequired,
-  author: PropTypes.string.isRequired,
-  robots: PropTypes.string.isRequired,
-  ogTitle: PropTypes.string.isRequired,
-  ogDescription: PropTypes.string.isRequired,
-  ogUrl: PropTypes.string.isRequired,
-  ogSiteName: PropTypes.string.isRequired,
-  ogImage: PropTypes.string.isRequired,
-  ogType: PropTypes.string.isRequired,
-  ogAlt: PropTypes.string.isRequired,
-  ogLocole: PropTypes.string.isRequired,
-  twitterTitle: PropTypes.string.isRequired,
-  twitterDescription: PropTypes.string.isRequired,
-  twitterUrl: PropTypes.string.isRequired,
-  twitterCard: PropTypes.string.isRequired,
-  twitterImage: PropTypes.string.isRequired,
-  twitterAlt: PropTypes.string.isRequired,
+  title: PropTypes.string,
+  description: PropTypes.string,
+  href: PropTypes.string,
+  author: PropTypes.string,
+  robots: PropTypes.string,
+  ogTitle: PropTypes.string,
+  ogDescription: PropTypes.string,
+  ogUrl: PropTypes.string,
+  ogSiteName: PropTypes.string,
+  ogImage: PropTypes.string,
+  ogType: PropTypes.string,
+  ogAlt: PropTypes.string,
+  ogLocale: PropTypes.string,
+  twitterTitle: PropTypes.string,
+  twitterDescription: PropTypes.string,
+  twitterUrl: PropTypes.string,
+  twitterCard: PropTypes.string,
+  twitterImage: PropTypes.string,
+  twitterAlt: PropTypes.string,
   twitterSite: PropTypes.string,
   twitterCreator: PropTypes.string
 }
