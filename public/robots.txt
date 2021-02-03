@@ -3,6 +3,6 @@ Sitemap: https://myfinances.vercel.app/sitemap.xml
 User-Agent: *
 Allow: /entrar
 Allow: /cadastrar
-Disallow: /
+Allow: /
 Disallow: /ganhos
 Disallow: /gastos
