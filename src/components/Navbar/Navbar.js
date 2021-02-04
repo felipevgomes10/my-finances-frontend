@@ -13,6 +13,8 @@ import { useDispatch, useSelector } from 'react-redux'
 import { userLogout } from '../../redux/reducers/user'
 import MobileMenu from '../MobileMenu/MobileMenu'
 import { closeMenu } from '../../redux/reducers/mobileMenu'
+import { motion } from 'framer-motion'
+import { wrapper } from '../../animations/fade'
 
 const Navbar = () => {
   const router = useRouter()
@@ -45,7 +47,7 @@ const Navbar = () => {
           </h4>
           <NavLinks className="NavLinksWrapper">
             {user.data && (
-              <div>
+              <motion.div initial="hidden" animate="visible" variants={wrapper}>
                 <Link href="/">
                   <a>
                     <HistoryIcon /> Histórico
@@ -61,9 +63,9 @@ const Navbar = () => {
                     <ExpensesIcon /> Gastos
                   </a>
                 </Link>
-              </div>
+              </motion.div>
             )}
-            <div>
+            <motion.div initial="hidden" animate="visible" variants={wrapper}>
               {!user.data ? (
                 <>
                   <Link href="/entrar">
@@ -84,7 +86,7 @@ const Navbar = () => {
                   </a>
                 </Link>
               )}
-            </div>
+            </motion.div>
           </NavLinks>
         </DivBorder>
       </NavBar>

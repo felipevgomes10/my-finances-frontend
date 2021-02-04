@@ -11,6 +11,8 @@ import PropTypes from 'prop-types'
 import { createNewUser } from '../../redux/reducers/createUser'
 import Logo from '../../../public/money.jpg'
 import PageHead from '../../components/Head'
+import { motion } from 'framer-motion'
+import { wrapper } from '../../animations/fade'
 
 const SignUp = ({ baseUrl }) => {
   const username = useForm()
@@ -65,8 +67,9 @@ const SignUp = ({ baseUrl }) => {
         twitterAlt="website logo"
         twitterCreator="@felipevgomes10"
       />
-      <div>
+      <motion.section initial="hidden" animate="visible" variants={wrapper}>
         <Welcome
+          heading="Bem-vindo ao My Finances"
           text={
             'Aqui você pode anotar e manter do controle dos seus gastos. Cadastre-se agora e começe a ter controle da sua vida financeira!'
           }
@@ -109,7 +112,7 @@ const SignUp = ({ baseUrl }) => {
             <Button disabled>Aguarde</Button>
           )}
         </Form>
-      </div>
+      </motion.section>
     </>
   )
 }

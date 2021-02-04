@@ -1,6 +1,7 @@
+import { motion } from 'framer-motion'
 import styled from 'styled-components'
 
-export const WelcomeWrapper = styled.section`
+export const WelcomeWrapper = styled(motion.div)`
   display: flex;
   justify-content: flex-start;
   align-items: flex-start;

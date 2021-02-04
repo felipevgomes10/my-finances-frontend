@@ -1,15 +1,13 @@
 import React from 'react'
 import { WelcomeSign, WelcomeWrapper } from './WelcomeStyles'
 import Proptypes from 'prop-types'
-import { useSelector } from 'react-redux'
+import { item } from '../../animations/fade'
 
-const Welcome = ({ text }) => {
-  const username = useSelector(state => state.user.data?.user.username)
-
+const Welcome = ({ heading, text }) => {
   return (
-    <WelcomeWrapper>
+    <WelcomeWrapper variants={item}>
       <WelcomeSign>
-        <h1>{username ? `Olá, ${username}!` : 'Bem-vindo ao My Finances!'}</h1>
+        <h1>{heading}</h1>
         <p>{text}</p>
       </WelcomeSign>
     </WelcomeWrapper>
@@ -19,5 +17,6 @@ const Welcome = ({ text }) => {
 export default Welcome
 
 Welcome.propTypes = {
+  heading: Proptypes.string,
   text: Proptypes.string
 }
