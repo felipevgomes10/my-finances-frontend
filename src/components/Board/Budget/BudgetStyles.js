@@ -1,8 +1,9 @@
+import { motion } from 'framer-motion'
 import styled, { css } from 'styled-components'
 import { flex } from '../../commonStyles'
 import { wrapperStyles } from '../BoardStyles'
 
-export const BudgetWrapper = styled.div`
+export const BudgetWrapper = styled(motion.div)`
   ${wrapperStyles};
   position: relative;
 

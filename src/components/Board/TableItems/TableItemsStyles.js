@@ -1,8 +1,9 @@
+import { motion } from 'framer-motion'
 import styled, { css } from 'styled-components'
 import { flex } from '../../commonStyles'
 import { wrapperStyles } from '../BoardStyles'
 
-export const TableItemsWrapper = styled.div`
+export const TableItemsWrapper = styled(motion.div)`
   ${flex};
   justify-content: flex-start;
   align-items: flex-start;

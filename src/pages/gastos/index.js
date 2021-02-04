@@ -8,6 +8,8 @@ import expenses from '../../redux/filters/expenses'
 import PropTypes from 'prop-types'
 import DeleteModal from '../../components/Modals/DeleteModal/DeleteModal'
 import PageHead from '../../components/Head'
+import { motion } from 'framer-motion'
+import { wrapper } from '../../animations/fade'
 
 const Expenses = ({ baseUrl }) => {
   const { user } = useSelector(state => state)
@@ -37,7 +39,7 @@ const Expenses = ({ baseUrl }) => {
   return (
     <>
       <PageHead title="Gastos | My Finances" />
-      <div>
+      <motion.section initial="hidden" animate="visible" variants={wrapper}>
         <TableItems title="Gastos" total={total}>
           {userExpenses.map(({ description, value, id, type }) => (
             <Entry
@@ -51,7 +53,7 @@ const Expenses = ({ baseUrl }) => {
         </TableItems>
         {entryModal.open && <EntryModal baseUrl={baseUrl} />}
         {deleteModal.open && <DeleteModal baseUrl={baseUrl} />}
-      </div>
+      </motion.section>
     </>
   )
 }

@@ -10,6 +10,7 @@ import {
   openDeleteModal,
   setModalEndPoint
 } from '../../../redux/reducers/deleteModal'
+import { item } from '../../../animations/fade'
 
 const Budget = () => {
   const [totalEarned, setTotalEarned] = useState()
@@ -57,7 +58,7 @@ const Budget = () => {
 
   if (!data.user.budget) {
     return (
-      <BudgetWrapper addNew>
+      <BudgetWrapper variants={item} addNew>
         <h4>Adicione um orçamento aqui</h4>
         <button onClick={() => openModalToPostOrPut('POST')}>
           <Add />
@@ -66,7 +67,7 @@ const Budget = () => {
     )
   }
   return (
-    <BudgetWrapper red={totalRemaining <= 0}>
+    <BudgetWrapper variants={item} red={totalRemaining <= 0}>
       <p>
         Orçamento: <span>R$ {data.user.budget.value}</span>
       </p>

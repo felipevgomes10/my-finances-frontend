@@ -13,6 +13,8 @@ import Entry from '../components/Entry/Entry'
 import earnings from '../redux/filters/earnings'
 import expenses from '../redux/filters/expenses'
 import PageHead from '../components/Head'
+import { motion } from 'framer-motion'
+import { wrapper } from '../animations/fade'
 
 const Home = ({ baseUrl }) => {
   const { user } = useSelector(state => state)
@@ -36,8 +38,11 @@ const Home = ({ baseUrl }) => {
   return (
     <>
       <PageHead title="Página Inicial | My Finances" />
-      <div>
-        <Welcome text="Aqui você pode anotar e manter o controle dos seus gastos. Começe a ter controle da sua vida financeira!" />
+      <motion.section initial="hidden" animate="visible" variants={wrapper}>
+        <Welcome
+          heading={`Olá, ${user.data.user.username}`}
+          text="Aqui você pode anotar e manter o controle dos seus gastos. Começe a ter controle da sua vida financeira!"
+        />
         <Board>
           <Budget />
           <TableItems title="Gastos" first>
@@ -77,7 +82,7 @@ const Home = ({ baseUrl }) => {
         {budgetModal.open && <BudgetModal baseUrl={baseUrl} />}
         {deleteModal.open && <DeleteModal baseUrl={baseUrl} />}
         {entryModal.open && <EntryModal baseUrl={baseUrl} />}
-      </div>
+      </motion.section>
     </>
   )
 }

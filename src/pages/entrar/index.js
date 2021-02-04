@@ -11,6 +11,8 @@ import PropTypes from 'prop-types'
 import ErrorText from '../../components/Helpers/Error/Error'
 import PageHead from '../../components/Head'
 import Logo from '../../../public/money.jpg'
+import { motion } from 'framer-motion'
+import { wrapper } from '../../animations/fade'
 
 const SignIn = ({ baseUrl }) => {
   const email = useForm()
@@ -62,8 +64,9 @@ const SignIn = ({ baseUrl }) => {
         twitterAlt="website logo"
         twitterCreator="@felipevgomes10"
       />
-      <div>
+      <motion.section initial="hidden" animate="visible" variants={wrapper}>
         <Welcome
+          heading="Bem-vindo ao My Finances"
           text={
             'Aqui você pode anotar e manter do controle dos seus gastos. Entre na sua conta e começe a ter controle da sua vida financeira!'
           }
@@ -96,7 +99,7 @@ const SignIn = ({ baseUrl }) => {
             <Button disabled>Entrando</Button>
           )}
         </Form>
-      </div>
+      </motion.section>
     </>
   )
 }

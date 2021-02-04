@@ -5,6 +5,8 @@ import PropTypes from 'prop-types'
 import { useDispatch } from 'react-redux'
 import { openEntryModal } from '../../../redux/reducers/entryModal'
 import { setEntryMethod } from '../../../redux/reducers/entry'
+import { item } from '../../../animations/fade'
+import { motion } from 'framer-motion'
 
 const TableItems = ({ title, first, second, third, total, children }) => {
   const dispatch = useDispatch()
@@ -16,14 +18,19 @@ const TableItems = ({ title, first, second, third, total, children }) => {
 
   return (
     <>
-      <TableItemsWrapper first={first} second={second} third={third}>
+      <TableItemsWrapper
+        first={first}
+        second={second}
+        third={third}
+        variants={item}
+      >
         <button onClick={openModal}>
           <Add />
         </button>
         <h4>{title}</h4>
         {children}
       </TableItemsWrapper>
-      {total && <p>Total: R$ {total}</p>}
+      {total > 0 && <motion.p variants={item}>Total: R$ {total}</motion.p>}
     </>
   )
 }

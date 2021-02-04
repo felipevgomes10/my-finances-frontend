@@ -1,6 +1,7 @@
+import { motion } from 'framer-motion'
 import styled from 'styled-components'
 
-export const FormPage = styled.form`
+export const FormPage = styled(motion.form)`
   width: 100%;
   background: ${props => props.theme.colors.background};
   border-radius: 20px;
