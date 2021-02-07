@@ -32,6 +32,10 @@ export const WelcomeSign = styled.div`
     @media (max-width: 800px) {
       font-size: 2.2rem;
     }
+
+    @media (max-width: 330px) {
+      font-size: 1.8rem;
+    }
   }
 
   p {

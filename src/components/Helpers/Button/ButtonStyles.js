@@ -9,7 +9,6 @@ export const ButtonForm = styled.button`
   border: none;
   outline: none;
   border-radius: 10px;
-  padding: 1.6rem 3.2rem;
   transition: 0.3s;
   cursor: pointer;
 
