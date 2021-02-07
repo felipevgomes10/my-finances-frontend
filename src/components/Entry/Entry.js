@@ -33,10 +33,12 @@ const Entry = ({ id, description, value, type }) => {
 
   return (
     <EntryWrapper red={type === 'expense'}>
-      <span>{description}</span>
-      <span>
-        {type === 'expense' ? '- R$' : '+ R$'} {value}
-      </span>
+      <div>
+        <span>{description}</span>
+        <span>
+          {type === 'expense' ? '- R$' : '+ R$'} {value}
+        </span>
+      </div>
       <EntryButtonsWrapper>
         <button onClick={handleEntryUpdate}>
           <EditIcon />

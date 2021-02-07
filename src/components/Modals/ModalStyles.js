@@ -4,7 +4,6 @@ import { flex } from '../commonStyles'
 const slideDown = keyframes`
   to {
     opacity: 1;
-    pointer-events: initial;
     transform: translate(-50%, -50%);
   }
 `
@@ -39,7 +38,6 @@ export const ModalWrapper = styled.form`
   border-radius: 20px;
   z-index: 2;
   opacity: 0;
-  pointer-events: none;
   animation: ${slideDown} 0.3s forwards;
 
   @media (max-width: 400px) {
@@ -111,7 +109,6 @@ export const ButtonWrapper = styled.div`
     outline: none;
     width: 6.1rem;
     height: 2.9rem;
-    padding: 1.6rem;
     border-radius: 10px;
     transition: 0.3s;
     cursor: pointer;

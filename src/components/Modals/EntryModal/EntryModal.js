@@ -84,7 +84,7 @@ const EntryModal = ({ baseUrl }) => {
         />
         <InputModal
           as="select"
-          padding="0"
+          padding="0 0 0 1.6rem"
           height="3.6rem"
           margin
           value={entryModal.type}

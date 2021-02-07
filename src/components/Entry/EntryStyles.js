@@ -5,12 +5,19 @@ export const EntryWrapper = styled.div`
   ${flex};
   justify-content: flex-start;
   width: 100%;
-  height: 3.6rem;
+  min-height: 3.6rem;
   background: ${props => props.theme.colors.fontFade};
   border-radius: 10px;
   margin-bottom: 1.6rem;
   margin-bottom: 1.6rem;
   padding: 1rem;
+
+  & > div:first-child {
+    ${flex};
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    margin-right: auto;
+  }
 
   span {
     font-size: 1.4rem;
@@ -24,7 +31,6 @@ export const EntryWrapper = styled.div`
 
   span:nth-of-type(2) {
     color: ${props => props.theme.colors.positive};
-    margin-right: auto;
   }
 
   ${props =>
